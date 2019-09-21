@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-
+import { SetTransform } from './Transform'
 import { authReducer, navReducer, notesReducer } from './reducers'
 
 // const persistConfig = {
@@ -14,7 +14,8 @@ import { authReducer, navReducer, notesReducer } from './reducers'
 const rootPersistConfig = {
   key: 'root',
   storage: storage,
-  blacklist: ['navigation']
+  blacklist: ['navigation'],
+  transforms: [SetTransform]
 };
 
 const authPersistConfig = {
