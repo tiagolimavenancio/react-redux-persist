@@ -1,6 +1,6 @@
 // AuthReducer.js
 import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import { persistReducer, REHYDRATE } from 'redux-persist';
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -8,13 +8,12 @@ const INITIAL_STATE = {
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
-  // reducer implementation
+  switch(action.type) {
+    case REHYDRATE:
+        return { ...state, currentUser: action.payload.currentUser }
+    default:
+      return state
+  }
 };
 
-const persistConfig = {
-  key: 'auth',
-  storage: storage,
-  blacklist: ['isLoggingIn']
-};
-
-export default persistReducer(persistConfig, AuthReducer);
+export default persistReducer(AuthReducer);
